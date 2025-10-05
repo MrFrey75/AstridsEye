@@ -390,4 +390,6 @@ if __name__ == '__main__':
     app = OllamaImageGeneratorApp(root)
     root.mainloop()
 
+git remote add origin https://github.com/MrFrey75/AstridsEye.git
+
 
