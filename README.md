@@ -1,4 +1,15 @@
+
+
+
 # AstridsEye
+
+<!-- Badges -->
+![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
+
+[**User Guide**](USER_GUIDE.md) | [**Developer Guide**](DEVELOPER_GUIDE.md)
+[**Contributing**](CONTRIBUTING.md) | [**MIT License**](LICENSE)
 
 A small Tkinter GUI that calls a local Ollama server to generate images from prompts.
 
@@ -34,6 +45,8 @@ Before you run the app you should make sure you have an image-capable model avai
 2. Pull a recommended image-capable model. Example model names vary by registry. Two commonly-used examples you can try are `moondream` and `bakllava` (if available):
 
 ```bash
+ollama pull llava
+# or
 ollama pull moondream
 # or
 ollama pull bakllava

@@ -1,0 +1,3 @@
+api_url: http://localhost:11434/api/generate
+last_model: bakllava
+save_path: /home/fray/Documents/image_sv
