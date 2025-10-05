@@ -13,6 +13,8 @@ from .client import OllamaClient
 
 class AstridsEyeGUI:
     def __init__(self, root):
+        # Path for YAML log file
+        self.log_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'astridseye_log.yaml'))
         self.root = root
         self.root.title("AstridsEye")
         self.root.geometry("900x650")
@@ -117,6 +119,34 @@ class AstridsEyeGUI:
                 self.raw_text.insert(tk.END, s + "\n\n")
             self.raw_text.see(tk.END)
             self.raw_text.configure(state=tk.DISABLED)
+        except Exception:
+            pass
+        # Log prompt and data to YAML file if relevant
+        if title.lower().startswith("payload") and isinstance(obj, dict):
+            self._log_prompt_yaml(obj)
+    def _log_prompt_yaml(self, payload):
+        """
+        Append prompt and metadata to astridseye_log.yaml in project root.
+        """
+        import yaml
+        import datetime
+        log_entry = {
+            'timestamp': datetime.datetime.utcnow().isoformat() + 'Z',
+            'model': payload.get('model'),
+            'prompt': payload.get('prompt'),
+            'stream': payload.get('stream'),
+        }
+        try:
+            # Read existing log
+            if os.path.exists(self.log_path):
+                with open(self.log_path, 'r') as f:
+                    existing = yaml.safe_load(f) or []
+            else:
+                existing = []
+            # Append new entry
+            existing.append(log_entry)
+            with open(self.log_path, 'w') as f:
+                yaml.safe_dump(existing, f)
         except Exception:
             pass
 
